@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marché Fraîcheur | Produits frais</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+:root{
+ --primary:rgb(7, 7, 145);--secondary:red;--accent:white;
+ --dark:#1e1e1e;--light:red;--radius:22px
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;background:linear-gradient(180deg,#fafafa,#f1f1f1);color:var(--dark);overflow-x:hidden;}
+
+/* HEADER */
+header{background:rgba(255,255,255,.85);backdrop-filter:blur(10px);padding:18px 8%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:1000}
+header h1{color:var(--primary);font-size:1.9rem;font-weight:700}
+nav a{margin-left:25px;text-decoration:none;color:var(--dark);font-weight:500;position:relative}
+nav a::after{content:'';position:absolute;width:0;height:2px;background:var(--primary);left:0;bottom:-6px;transition:.3s}
+nav a:hover::after{width:100%}
+
+/* HERO */
+.hero{height:95vh;background:linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.6)),url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7') center/cover;display:flex;align-items:center;padding:0 8%;color:#fff}
+.hero-content{animation:heroFade 1.2s ease}
+.hero h2{font-size:3.4rem;margin-bottom:20px;line-height:1.1}
+.hero p{opacity:.9;margin-bottom:30px}
+
+.btn{background:var(--primary);color:#fff;padding:15px 36px;border-radius:50px;text-decoration:none;font-weight:500;display:inline-flex;align-items:center;gap:8px;transition:.35s;border-bottom: 2px solid red;}
+.btn:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.25);letter-spacing:1px;}
+
+section{padding:90px 8%}
+section h3{text-align:center;font-size:2.4rem;margin-bottom:40px;color:var(--primary)}
+
+/* FILTERS */
+.filters{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-bottom:30px}
+.filters button{border:none;padding:12px 28px;border-radius:30px;cursor:pointer;background:#eaeaea;font-weight:500;transition:.3s}
+.filters button.active,.filters button:hover{background:var(--primary);color:red;transform:scale(1.05)}
+
+.search-bar{max-width:420px;margin:0 auto 50px}
+.search-bar input{width:100%;padding:14px 20px;border-radius:30px;border:none;box-shadow:0 10px 25px rgba(0,0,0,.08);outline:none;
+font-size:1rem;}
+.search-bar input:focus{
+border:2px solid var(--primary);
+}
+
+/* PRODUCTS */
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:35px}
+.product{background:white;border-radius:var(--radius);overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.12);position:relative;border-bottom: red solid 3px;cursor:pointer;}
+.product::before{content:'';position:absolute;inset:0;background:linear-gradient(transparent,rgba(0,0,0,.5));opacity:0;transition:.4s}
+.product:hover::before{opacity:1}
+.product.hide{opacity:0;transform:scale(.85);pointer-events:none}
+.product:hover{transform:translateY(-10px) scale(1.02)}
+.product img{width:100%;height:240px;object-fit:cover}
+.product-content{padding:22px;position:relative}
+.price{color:var(--primary);font-weight:700;margin:10px 0}
+.product{
+  transition:
+transform .4s ease,
+box-shadow .4s ease,
+opacity .3s ease;
+will-change: transform;
+}
+
+.actions{display:flex;justify-content:space-between;align-items:center;margin-top:15px}
+.whatsapp{background:var(--accent);color:#fff;padding:10px 18px;border-radius:30px;text-decoration:none;font-size:.9rem;transition:.3s}
+.whatsapp:hover{background:#1da851;transform:scale(1.05)}
+
+/* FOOTER */
+footer{background:#111;color:#fff;padding:50px 8%;text-align:center}
+footer i{margin:0 12px;font-size:1.3rem;transition:.3s}
+footer i:hover{color:var(--secondary);transform:translateY(-4px)}
+
+@keyframes heroFade{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:900px){.hero h2{font-size:2.3rem}}
+
+@media(max-width:768px){
+
+header{
+flex-direction:column;
+gap:15px;
+padding:20px;
+}
+
+nav{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:15px;
+}
+
+nav a{
+margin-left:0;
+}
+
+.hero{
+height:auto;
+padding:120px 20px;
+text-align:center;
+}
+
+.hero h2{
+font-size:2rem;
+line-height:1.4;
+}
+
+section{
+padding:70px 20px;
+}
+
+.products{
+grid-template-columns:1fr;
+}
+
+#apropos div,
+#contact div{
+grid-template-columns:1fr !important;
+flex-direction:column;
+}
+}
+.product img{
+transition:.5s;
+}
+
+.product:hover img{
+transform:scale(1.08);
+}
+@keyframes pulse{
+
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.1);
+}
+
+100%{
+transform:scale(1);
+}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Marché Fraîcheur</h1>
+  <nav>
+    <a href="#">Accueil</a>
+    <a href="#produits">Produits</a>
+    <a href="#apropos">À propos</a>
+    <a href="#contact">Contact</a>
+    <a href="#panier" class="btn" style="padding:10px 20px">
+      <i class="fas fa-shopping-cart"></i>
+      <span id="cart-count">0</span>
+    </a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h2>Commandez, discutons ensemble et payez en toute sécurité. Vivre la proximité avec nos clients est notre sacerdoce. <span style="color: red;">WELCOME</span></h2>
+    <p>Découvrez des fruits, légumes, épices et produits alimentaires frais sélectionnés chaque jour pour votre cuisine.</p>
+    <a href="#produits" class="btn">Voir les collections</a>
+  </div>
+</section>
+
+<section id="produits">
+  <h3>Nos Produits</h3>
+
+  <div class="filters">
+    <button class="active" onclick="setFilter(this,'all')">Tous</button>
+    <button onclick="setFilter(this,'Légumes')">Légumes</button>
+    <button onclick="setFilter(this,'Fruits')">Fruits</button>
+    <button onclick="setFilter(this,'Épices')">Épices</button>
+    <button onclick="setFilter(this,'Produits frais')">Produits frais</button>
+    <button onclick="setFilter(this,'Autres')">Autres</button>
+
+  </div>
+
+  <div class="search-bar">
+    <input type="text" id="search" placeholder="Rechercher par nom ou prix…" onkeyup="searchProducts()">
+  </div>
+
+  <div class="products">
+    <div class="product" data-category="Légumes">
+      <img src="https://images.unsplash.com/photo-1542838132-92c53300491e" alt="Légumes">
+      <div class="product-content">
+        <h4>Tomates fraîches</h4>
+        <p class="price">2 500 FCFA / kg</p>
+        <button class="btn" onclick="openModal(this)"><i class="fas fa-cart-plus"></i> Commander</button>
+      </div>
+    </div>
+
+    <div class="product" data-category="Légumes">
+      <img src="https://images.unsplash.com/photo-1518843875459-f738682238a6" alt="Table">
+      <div class="product-content">
+        <h4>Pommes de terre</h4>
+        <p class="price">1 800 FCFA / kg</p>
+        <button class="btn" onclick="openModal(this)"><i class="fas fa-cart-plus"></i> Commander</button>
+      </div>
+    </div>
+
+    <div class="product" data-category="Légumes">
+      <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655" alt="Lampe">
+      <div class="product-content">
+        <h4>Oignons rouges</h4>
+        <p class="price">2 000 FCFA / kg</p>
+        <button class="btn" onclick="openModal(this)"><i class="fas fa-cart-plus"></i> Commander</button>
+      </div>
+    </div>
+
+    <div class="product" data-category="Légumes">
+      <img src="https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c" alt="Lit">
+      <div class="product-content">
+        <h4>Piments frais</h4>
+        <p class="price">1 500 FCFA / kg</p>
+        <button class="btn" onclick="openModal(this)"><i class="fas fa-cart-plus"></i> Commander</button>
+      </div>
+    </div>
+
+    <div class="product" data-category="Légumes">
+      <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf" alt="Fauteuil">
+      <div class="product-content">
+        <h4>Mangues naturelles</h4>
+        <p class="price">3 500 FCFA / panier</p>
+        <button class="btn" onclick="openModal(this)"><i class="fas fa-cart-plus"></i> Commander</button>
+      </div>
+    </div>
+
+    <div class="product" data-category="Légumes">
+      <img src="https://images.unsplash.com/photo-1519996529931-28324d5a630e" alt="Étagère">
+      <div class="product-content">
+        <h4>Carottes bio</h4>
+        <p class="price">2 200 FCFA / kg</p>
+        <button class="btn" onclick="openModal(this)"><i class="fas fa-cart-plus"></i> Commander</button>
+      </div>
+    </div>
+
+    <div class="product" data-category="Légumes">
+      <img src="https://images.unsplash.com/photo-1519996529931-28324d5a630e" alt="Étagère">
+      <div class="product-content">
+        <h4>Carottes bio</h4>
+        <p class="price">2 200 FCFA / kg</p>
+        <button class="btn" onclick="openModal(this)"><i class="fas fa-cart-plus"></i> Commander</button>
+      </div>
+    </div>
+
+    <div class="product" data-category="Fruits">
+      <img src="https://images.unsplash.com/photo-1519996529931-28324d5a630e" alt="Étagère">
+      <div class="product-content">
+        <h4>Carottes bio</h4>
+        <p class="price">2 200 FCFA / kg</p>
+        <button class="btn" onclick="openModal(this)"><i class="fas fa-cart-plus"></i> Commander</button>
+      </div>
+    </div>
+
+    <div class="product" data-category="Légumes">
+      <img src="https://images.unsplash.com/photo-1519996529931-28324d5a630e" alt="Étagère">
+      <div class="product-content">
+        <h4>Carottes bio</h4>
+        <p class="price">2 200 FCFA / kg</p>
+        <button class="btn" onclick="openModal(this)"><i class="fas fa-cart-plus"></i> Commander</button>
+      </div>
+    </div>
+
+    <div class="product" data-category="Légumes">
+      <img src="https://images.unsplash.com/photo-1519996529931-28324d5a630e" alt="Étagère">
+      <div class="product-content">
+        <h4>Carottes bio</h4>
+        <p class="price">2 200 FCFA / kg</p>
+        <button class="btn" onclick="openModal(this)"><i class="fas fa-cart-plus"></i> Commander</button>
+      </div>
+    </div>
+
+    <div class="product" data-category="Légumes">
+      <img src="https://images.unsplash.com/photo-1519996529931-28324d5a630e" alt="Étagère">
+      <div class="product-content">
+        <h4>Carottes bio</h4>
+        <p class="price">2 200 FCFA / kg</p>
+        <button class="btn" onclick="openModal(this)"><i class="fas fa-cart-plus"></i> Commander</button>
+      </div>
+    </div>
+
+    <div class="product" data-category="Légumes">
+      <img src="https://images.unsplash.com/photo-1519996529931-28324d5a630e" alt="Étagère">
+      <div class="product-content">
+        <h4>Carottes bio</h4>
+        <p class="price">2 200 FCFA / kg</p>
+        <button class="btn" onclick="openModal(this)"><i class="fas fa-cart-plus"></i> Commander</button>
+      </div>
+    </div>
+
+    <div class="product" data-category="Légumes">
+      <img src="https://images.unsplash.com/photo-1519996529931-28324d5a630e" alt="Étagère">
+      <div class="product-content">
+        <h4>Carottes bio</h4>
+        <p class="price">2 200 FCFA / kg</p>
+        <button class="btn" onclick="openModal(this)"><i class="fas fa-cart-plus"></i> Commander</button>
+      </div>
+    </div>
+
+    <div class="product" data-category="Légumes">
+      <img src="https://images.unsplash.com/photo-1519996529931-28324d5a630e" alt="Étagère">
+      <div class="product-content">
+        <h4>Carottes bio</h4>
+        <p class="price">2 200 FCFA / kg</p>
+        <button class="btn" onclick="openModal(this)"><i class="fas fa-cart-plus"></i> Commander</button>
+      </div>
+    </div>
+
+    <div class="product" data-category="Légumes">
+      <img src="https://images.unsplash.com/photo-1519996529931-28324d5a630e" alt="Étagère">
+      <div class="product-content">
+        <h4>Carottes bio</h4>
+        <p class="price">2 200 FCFA / kg</p>
+        <button class="btn" onclick="openModal(this)"><i class="fas fa-cart-plus"></i> Commander</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="apropos">
+  <h3>À propos de nous</h3>
+
+  <div style="max-width:1000px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center">
+
+    <div>
+      <p style="margin-bottom:20px">
+        Marché Fraîcheur est spécialisée dans la vente de produits frais du marché, légumes, fruits, céréales et produits alimentaires de qualité.
+        Nous accompagnons nos clients dans la préparation de repas sains grâce à des produits frais et soigneusement sélectionnés.
+      </p>
+      <p>
+        Qualité, design et satisfaction client sont au cœur de notre engagement.
+      </p>
+    </div>
+
+    <div>
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Showroom meubles"
+      style="width:100%;height:360px;object-fit:cover;border-radius:22px;box-shadow:0 30px 60px rgba(0,0,0,.15)">
+    </div>
+
+  </div>
+</section>
+
+<section id="contact">
+  <h3>Contact & Réseaux sociaux</h3>
+
+  <div style="max-width:900px;margin:auto;display:flex;flex-wrap:wrap;gap:40px;align-items:center;justify-content:center">
+
+    <div style="flex:1;min-width:260px">
+      <p style="margin-bottom:20px;text-align:center">Contactez-nous directement via nos réseaux sociaux. Réponse rapide garantie.</p>
+      <div style="display:flex;flex-direction:column;gap:15px;align-items:center">
+        <a href="#" class="btn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        <a href="#" class="btn"><i class="fab fa-facebook"></i> Facebook</a>
+        <a href="#" class="btn"><i class="fab fa-instagram"></i> Instagram</a>
+      </div>
+    </div>
+
+    <div style="flex:1;min-width:260px">
+      <img src="https://images.unsplash.com/photo-1542838132-92c53300491e" alt="Contact showroom"
+      style="width:100%;height:320px;object-fit:cover;border-radius:22px;box-shadow:0 25px 50px rgba(0,0,0,.15)">
+    </div>
+
+  </div>
+</section>
+
+<section id="panier" style="background:#fff">
+  <h3>Votre Panier & Total</h3>
+
+  <div style="max-width:800px;margin:auto;background:#f8f8f8;padding:30px;border-radius:22px;box-shadow:0 20px 40px rgba(0,0,0,.08);border-bottom: solid 5px red;">
+    <div id="cart-items" style="margin-bottom:20px">
+      <p>Votre panier est vide.</p>
+    </div>
+
+    <h2 id="cart-total" style="margin-bottom:20px;color:#6b4f3f">Total : 0 FCFA</h2>
+
+    <a id="whatsapp-order" href="#" target="_blank" class="btn" style="width:100%;justify-content:center">
+      <i class="fab fa-whatsapp"></i> Commander via WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- BOUTON WHATSAPP FLOTTANT -->
+<a href="https://wa.me/221770000000" target="_blank"
+style="position:fixed;bottom:25px;right:25px;background:#25d366;color:white;width:65px;height:65px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,.25);z-index:9999;animation:pulse 1.5s infinite;">
+<i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- POPUP PRODUIT -->
+<div id="product-modal" style="position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:99999;padding:20px;">
+  <div style="background:#fff;max-width:500px;width:100%;border-radius:22px;overflow:hidden;position:relative;animation:heroFade .4s ease;">
+    <span onclick="closeModal()" style="position:absolute;top:15px;right:20px;font-size:30px;cursor:pointer">&times;</span>
+    <img id="modal-image" src="" style="width:100%;height:300px;object-fit:cover">
+    <div style="padding:25px">
+      <h2 id="modal-title"></h2>
+      <p id="modal-price" style="color: red;font-weight:700;margin:15px 0"></p>
+
+      <div style="display:flex;align-items:center;gap:15px;margin-bottom:20px">
+        <button onclick="changeQty(-1)" class="btn">-</button>
+        <span id="qty">1</span>
+        <button onclick="changeQty(1)" class="btn">+</button>
+      </div>
+
+      <button onclick="confirmOrder()" class="btn" style="width:100%;justify-content:center">
+        <i class="fas fa-cart-plus"></i> Ajouter au panier
+      </button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Marché Fraîcheur. Tous droits réservés.</p>
+  <div style="background-color: rgb(7, 7, 145);">
+    <i class="fab fa-facebook"></i>
+    <i class="fab fa-instagram"></i>
+    <i class="fab fa-whatsapp"></i>
+  </div>
+</footer>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let currentProduct = null;
+let quantity = 1;
+let currentCategory = "all";
+
+window.onload = () => {
+  updateCart();
+  applyFilters();
+};
+
+function setFilter(btn, category) {
+
+currentCategory = category; // 👈 on mémorise la catégorie
+
+document.querySelectorAll('.filters button')
+  .forEach(button => button.classList.remove('active'));
+
+btn.classList.add('active');
+
+document.getElementById('search').value = '';
+
+applyFilters(); // 👈 on centralise le filtrage
+}
+
+function searchProducts() {
+
+const value = document
+  .getElementById('search')
+  .value
+  .toLowerCase()
+  .trim();
+
+applyFilters(value);
+}
+
+function openModal(button){
+  const product = button.closest('.product');
+
+  currentProduct = {
+    name: product.querySelector('h4').innerText,
+    priceText: product.querySelector('.price').innerText,
+    image: product.querySelector('img').src
+  };
+
+  quantity = 1;
+  document.getElementById('qty').innerText = quantity;
+
+  document.getElementById('modal-title').innerText = currentProduct.name;
+  document.getElementById('modal-price').innerText = currentProduct.priceText;
+  document.getElementById('modal-image').src = currentProduct.image;
+  document.body.style.overflow = 'hidden';
+
+  document.getElementById('product-modal').style.display = 'flex';
+}
+
+function applyFilters(searchValue = "") {
+
+let hasResult = false;
+
+document.getElementById('no-product-message')?.remove();
+document.getElementById('no-search-message')?.remove();
+
+document.querySelectorAll('.product').forEach(product => {
+
+  const categories = product.dataset.category.toLowerCase();
+  const text = product.innerText.toLowerCase();
+
+  const matchCategory =
+    currentCategory === "all" ||
+    categories.includes(currentCategory.toLowerCase());
+
+  const matchSearch =
+    searchValue === "" || text.includes(searchValue);
+
+  if (matchCategory && matchSearch) {
+    product.style.display = "block";
+    hasResult = true;
+  } else {
+    product.style.display = "none";
+  }
+});
+
+// message si rien trouvé
+if (!hasResult && searchValue !== "") {
+  const message = document.createElement("p");
+  message.id = "no-search-message";
+  message.textContent = "Aucun produit trouvé.";
+
+  styleNoResult(message);
+  document.querySelector(".products").appendChild(message);
+}
+
+if (!hasResult && searchValue === "") {
+  const message = document.createElement("p");
+  message.id = "no-product-message";
+  message.textContent = "Aucun produit disponible dans cette catégorie.";
+
+  styleNoResult(message);
+  document.querySelector(".products").appendChild(message);
+}
+}
+function styleNoResult(message){
+  message.style.textAlign = "center";
+  message.style.marginTop = "40px";
+  message.style.fontSize = "1.2rem";
+  message.style.fontWeight = "600";
+  message.style.color = "red";
+}
+
+function closeModal(){
+  document.getElementById('product-modal').style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+function changeQty(value){
+  quantity += value;
+  if(quantity < 1) quantity = 1;
+  document.getElementById('qty').innerText = quantity;
+}
+
+function confirmOrder(){
+
+  const existingProduct = cart.find(
+  item => item.name.trim().toLowerCase() ===
+  currentProduct.name.trim().toLowerCase()
+);
+
+if(existingProduct){
+
+  existingProduct.quantity += quantity;
+
+} else {
+
+  cart.push({
+    ...currentProduct,
+    quantity: quantity
+  });
+}
+
+updateCart();
+closeModal();
+showSuccessMessage();
+}
+function updateCart() {
+  const cartItems = document.getElementById('cart-items');
+  const cartCount = document.getElementById('cart-count');
+  const whatsappButton = document.getElementById('whatsapp-order');
+  const totalElement = document.getElementById('cart-total');
+
+  let totalQuantity = 0;
+
+cart.forEach(item => {
+  totalQuantity += item.quantity;
+});
+
+cartCount.innerText = totalQuantity;
+if (cart.length === 0) {
+
+cartItems.innerHTML = `
+  <p style="
+    text-align:center;
+    font-weight:600;
+    color:#777;
+  ">
+    Votre panier est vide.
+  </p>
+`;
+
+totalElement.innerText = 'Total : 0 FCFA';
+
+whatsappButton.href = '#';
+
+return;
+}
+
+  let html = '';
+  let total = 0;
+  let message = 'Bonjour, je souhaite commander :%0A%0A';
+
+  cart.forEach((item, index) => {
+
+    const numericPrice =
+      parseInt(item.priceText.replace(/[^0-9]/g,'')) || 0;
+
+      total += numericPrice * item.quantity;
+
+    html += `
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding:14px 0;
+        border-bottom:1px solid #ddd;
+        gap:15px;
+      ">
+
+        <div>
+          <strong>${item.name}</strong><br>
+<span>${item.priceText}</span><br>
+<small>Quantité : ${item.quantity}</small>
+        </div>
+
+        <button
+          onclick="removeItem(${index})"
+          style="
+            background:#ff4d4d;
+            color:white;
+            border:none;
+            padding:10px 15px;
+            border-radius:12px;
+            cursor:pointer;
+          ">
+          <i class="fas fa-trash"></i>
+        </button>
+
+      </div>
+    `;
+    message += `${index + 1}. ${item.name} x${item.quantity} - ${item.priceText}%0A`;
+  });
+
+  html += `
+    <button
+      onclick="clearCart()"
+      style="
+        margin-top:20px;
+        width:100%;
+        background:#111;
+        color:white;
+        border:none;
+        padding:15px;
+        border-radius:15px;
+        cursor:pointer;
+        font-weight:600;
+      ">
+      🗑️ Annuler toute la commande
+    </button>
+  `;
+
+  cartItems.innerHTML = html;
+
+  totalElement.innerText =
+    'Total : ' + total.toLocaleString() + ' FCFA';
+
+  message += `%0ATotal : ${total.toLocaleString()} FCFA`;
+
+  whatsappButton.href =
+    `https://wa.me/221770000000?text=${message}`;
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+function removeItem(index){
+  cart.splice(index, 1);
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  updateCart();
+}
+
+function clearCart(){
+
+cart = [];
+
+localStorage.removeItem("cart");
+
+updateCart();
+}
+function showSuccessMessage(){
+
+const message = document.createElement('div');
+
+message.innerHTML = `
+  <i class="fas fa-check-circle"></i>
+  Commande ajoutée avec succès !
+`;
+
+message.style.position = 'fixed';
+message.style.top = '30px';
+message.style.right = '30px';
+message.style.background = '#25d366';
+message.style.color = 'white';
+message.style.padding = '18px 28px';
+message.style.borderRadius = '18px';
+message.style.fontWeight = '600';
+message.style.boxShadow = '0 15px 40px rgba(0,0,0,.2)';
+message.style.zIndex = '999999';
+message.style.display = 'flex';
+message.style.alignItems = 'center';
+message.style.gap = '12px';
+message.style.animation = 'heroFade .4s ease';
+
+document.body.appendChild(message);
+
+setTimeout(() => {
+  message.remove();
+}, 3000);
+}
+window.onclick = function(e){
+
+const modal = document.getElementById('product-modal');
+
+if(e.target === modal){
+  closeModal();
+}
+}
+document.addEventListener('keydown', function(e){
+
+if(e.key === 'Escape'){
+  closeModal();
+}
+
+});
+</script>
+
+</body>
+</html>
